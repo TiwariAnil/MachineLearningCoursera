@@ -11,7 +11,7 @@ m = length(y); % number of training examples
 J = 0;  % the cost fucntion
 grad = zeros(size(theta));  % the gard i.e d/dx (J)
 
-% ====================== YOUR CODE HERE ======================
+% ====================== CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta.
 %               You should set J to the cost.
 %               Compute the partial derivatives and set grad to the partial
@@ -36,7 +36,6 @@ theta_change = (lambda* theta_change)/ (2) / m ;
 J = cost * (-1) / m;
 J = J + theta_change;
 
-
 grad = (X' * ((G) - y))/m; 
 
 for i=2:size(theta)
@@ -44,5 +43,4 @@ for i=2:size(theta)
 end;
 
 % =============================================================
-
 end
