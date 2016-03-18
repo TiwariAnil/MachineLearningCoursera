@@ -59,7 +59,6 @@ load('ex3weights.mat');
 %  the labels. You will now implement the "predict" function to use the
 %  neural network to predict the labels of the training set. This lets
 %  you compute the training set accuracy.
-
 pred = predict(Theta1, Theta2, X);
 
 fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);

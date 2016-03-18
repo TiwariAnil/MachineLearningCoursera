@@ -15,7 +15,6 @@
 %  For this exercise, you will not need to change any code in this file,
 %  or any other files other than those mentioned above.
 %
-
 %% Initialization
 clear ; close all; clc
 
@@ -28,6 +27,7 @@ num_labels = 10;          % 10 labels, from 1 to 10
 %  We start the exercise by first loading and visualizing the dataset. 
 %  You will be working with a dataset that contains handwritten digits.
 %
+
 
 % Load Training Data
 fprintf('Loading and Visualizing Data ...\n')
@@ -59,7 +59,6 @@ lambda = 0.1;
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
-
 
 %% ================ Part 3: Predict for One-Vs-All ================
 %  After ...
