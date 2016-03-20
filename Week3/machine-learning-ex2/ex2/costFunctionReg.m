@@ -11,36 +11,39 @@ m = length(y); % number of training examples
 J = 0;  % the cost fucntion
 grad = zeros(size(theta));  % the gard i.e d/dx (J)
 
-% ====================== CODE HERE ======================
+% ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta.
 %               You should set J to the cost.
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
-hypothisis = X*theta;   % Linear Reg function H()
 
-G = sigmoid(hypothisis);  % Logistic Reg funciton g() 
 
-cost = 0;
-theta_change = 0;
-for i=1:m
-  cost = cost + (  (y(i) * log(G(i)) )   +    ( 1 - y(i)) * log(1 - G(i)) );
-  %Stheta_change = theta_change + theta(i).^2;
-end
-theta_change = theta.^2;
-theta_change(1) = theta(1);
-theta_change = sum(theta_change) - theta(1); %
-% above is coz we don't have to regularize the theta(1) i.e theta0
-% this we add extra not coz any feature 
-theta_change = (lambda* theta_change)/ (2) / m ;
+
+% calculate cost function i.e h(x) = g(z) = 1./(1+e^-z)
+
+hypothisis = X * theta;
+g = sigmoid(hypothisis);
+cost_mat = (( y .* log(g) ) + ( 1 - y) .* log(1 - g));
+cost = sum(cost_mat);
+
+% calculate penalty
+% we need not penaliize the theta(1) as its just the base theta we have given.
+% excluded the first theta value
+penalty = sum(theta(2:end).^2);
+penalty = penalty*lambda/(2*m);
 J = cost * (-1) / m;
-J = J + theta_change;
+% Regularization to avoid OVERFITTING/UNDERFITTING 
+%Add penalty to the cost!
+J = J + penalty;
 
-grad = (X' * ((G) - y))/m; 
+grad = (X' * ((g) - y))/m; 
+%Adding the base value ie theta(1) = 0
+theta = [0 ; theta(2:end, :)];
+theta = theta .* (lambda/m);
 
-for i=2:size(theta)
-  grad(i) = grad(i) + (lambda / m) * theta(i);
-end;
+grad = grad + theta;
 
 % =============================================================
+
 end

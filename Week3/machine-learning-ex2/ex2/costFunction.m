@@ -20,15 +20,16 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
-hypothisis = X*theta;
+
+hypothisis =( X*theta);
 
 g = sigmoid(hypothisis);
 
 
 cost = 0;
-for i=1:m
-  cost = cost + (  (y(i) * log(g(i)) )   +    ( 1 - y(i)) * log(1 - g(i)) );
-end;
+
+cost = (  (y .* log(g) )   +    ( 1 - y) .* log(1 - g) );
+cost = sum(cost);
 
 
 J = cost * (-1) / m;

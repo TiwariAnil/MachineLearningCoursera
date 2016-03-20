@@ -48,6 +48,7 @@ hold off;
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
 
+
 %% ============ Part 2: Compute Cost and Gradient ============
 %  In this part of the exercise, you will implement the cost and gradient
 %  for logistic regression. You neeed to complete the code in 
@@ -71,6 +72,7 @@ fprintf(' %f \n', grad);
 
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
+
 
 %% ============= Part 3: Optimizing using fminunc  =============
 %  In this exercise, you will use a built-in function (fminunc) to find the
@@ -115,6 +117,7 @@ pause;
 %  our model.
 %
 %  Your task is to complete the code in predict.m
+
 %  Predict probability for a student with score 45 on exam 1 
 %  and score 85 on exam 2 
 
@@ -129,3 +132,4 @@ fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
 
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
+
