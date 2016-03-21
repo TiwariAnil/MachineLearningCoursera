@@ -30,13 +30,21 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+%usually our theta is ROW vector, so we do X*theta, but here is a column VECTOR, as each row is new theta for new class 
+% X = 5000x400, all_theta = 10x400
+hypothesis = X * all_theta';
+%Its just our main function that we need to find, here sigmoid is the main
+% g = 5000x10
+g = sigmoid(hypothesis);
 
+%We need maximum from all the theta for all the class for each INPUT.
+%max(g') = 1x5000, each representing the max value in colums of 10 classes
+[max_val, max_index] = max(g');
 
+% here index is our class. So, we need to to return the indices
 
-
-
+p = max_index';
 
 % =========================================================================
-
 
 end

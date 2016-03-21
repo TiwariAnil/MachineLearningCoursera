@@ -34,16 +34,32 @@ grad = zeros(size(theta));
 %           temp = theta; 
 %           temp(1) = 0;   % because we don't add anything for j = 0  
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
-%
 
+% ========================My OLD Working Code=====================================
 
+% calculate cost function i.e h(x) = g(z) = 1./(1+e^-z)
 
+hypothisis = X * theta;
+g = sigmoid(hypothisis);
+cost_mat = (( y .* log(g) ) + ( 1 - y) .* log(1 - g));
+cost = sum(cost_mat);
 
+% calculate penalty
+% we need not penaliize the theta(1) as its just the base theta we have given.
+% excluded the first theta value
+penalty = sum(theta(2:end).^2);
+penalty = penalty*lambda/(2*m);
+J = cost * (-1) / m;
+% Regularization to avoid OVERFITTING/UNDERFITTING 
+%Add penalty to the cost!
+J = J + penalty;
 
+grad = (X' * ((g) - y))/m; 
+%Adding the base value ie theta(1) = 0
+theta = [0 ; theta(2:end, :)];
+theta = theta .* (lambda/m);
 
-
-
-
+grad = grad + theta;
 
 % =============================================================
 

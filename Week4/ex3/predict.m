@@ -21,12 +21,24 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+%size(X) = 5000 x 400.........since 400, we need to add a0
+%size(Theta1) = 25 x 401
 
+a1 = [ones(m, 1) X];
 
+z2 = Theta1 * a1';
 
+a2 = sigmoid(z2);
 
+%a2 = [ones(26,1) a2];
 
+z3 = Theta2 * a2;
 
+hx = sigmoid(z3);
+
+[max_val, max_index] = max(hx');
+
+p = max_index';
 
 
 % =========================================================================
