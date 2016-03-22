@@ -21,18 +21,22 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% m = 5000
 %size(X) = 5000 x 400.........since 400, we need to add a0
 %size(Theta1) = 25 x 401
+% just like predictOneVsALL.m, it has 2 layers, do stpes for each layer!
 
 a1 = [ones(m, 1) X];
 
-z2 = Theta1 * a1';
+z2 = a1 *Theta1';
 
 a2 = sigmoid(z2);
 
 %a2 = [ones(26,1) a2];
 
-z3 = Theta2 * a2;
+a2 = [ones(m,1) a2];
+
+z3 = a2 * Theta2';
 
 hx = sigmoid(z3);
 
@@ -40,8 +44,5 @@ hx = sigmoid(z3);
 
 p = max_index';
 
-
 % =========================================================================
-
-
 end
