@@ -9,6 +9,8 @@ function p = multivariateGaussian(X, mu, Sigma2)
 %    covariance matrix)
 %
 
+
+% Code is already written
 k = length(mu);
 
 if (size(Sigma2, 2) == 1) || (size(Sigma2, 1) == 1)
