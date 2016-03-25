@@ -19,6 +19,7 @@
 %  You will start by loading the movie ratings dataset to understand the
 %  structure of the data.
 %  
+
 fprintf('Loading movie ratings dataset.\n\n');
 
 %  Load data
@@ -31,6 +32,7 @@ load ('ex8_movies.mat');
 %  rating to movie i
 
 %  From the matrix, we can compute statistics like average rating.
+
 fprintf('Average rating for movie 1 (Toy Story): %f / 5\n\n', ...
         mean(Y(1, R(1, :))));
 
@@ -76,11 +78,13 @@ pause;
 %  
 fprintf('\nChecking Gradients (without regularization) ... \n');
 
+
 %  Check gradients by running checkNNGradients
 checkCostFunction;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
+
 
 
 %% ========= Part 4: Collaborative Filtering Cost Regularization ========
