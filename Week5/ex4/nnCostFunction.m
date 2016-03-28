@@ -65,34 +65,43 @@ Theta2_grad = zeros(size(Theta2));
 
 a1 = [ones(m, 1) X];  % 5000x401
 
-
 z2 = a1 *Theta1';   % 5000x25
-
 a2 = sigmoid(z2); % 5000x25
 
-%a2 = [ones(26,1) a2];
-
-a2 = [ones(m,1) a2];  % 5000x26
+n = size(a2, 1);
+a2 = [ones(n,1) a2]; % 5000x26
 
 z3 = a2 * Theta2'; % 5000x10
+a3 = sigmoid(z3);  % 5000x10
 
-hx = sigmoid(z3);  % 5000x10
+% Explode y into 10 values with Y[i] := i == y.
+Y = zeros(num_labels, m);
+Y(sub2ind(size(Y), y', 1:m)) = 1;
 
-[max_val, max_index] = max(hx');
+Y = Y';
 
-p = max_index';
+% Till now no regularization
+J = ((1/m) * sum(sum((-Y .* log(a3))-((1-Y) .* log(1-a3)))));
+
+regularization_th1 = (lambda/(2*m)) * (sum(sum((Theta1(:,2:end)).^2)));
+regularization_th2 = (lambda/(2*m)) * (sum(sum((Theta2(:,2:end)).^2)));
+
+J = J + regularization_th1 + regularization_th2;
 
 
-cost_mat = (( y .* log(p) ) + ( 1 - y) .* log(1 - p));
+delta_3 = a3 - y;
+delta_2 = (delta_3 * Theta2(:,2:end)) .* sigmoidGradient(z2);
 
-size(cost_mat)
-m
-cost = sum(cost_mat);
 
-J = cost;
-J = sum(J);
+delta_cap2 = delta_3' * a2; 
+delta_cap1 = delta_2' * a1;
 
-J = J * (-1) / m;
+Theta1_grad = ((1/m) * delta_cap1) + ((lambda/m) * (Theta1));
+Theta2_grad = ((1/m) * delta_cap2) + ((lambda/m) * (Theta2));
+
+Theta1_grad(:,1) -= ((lambda/m) * (Theta1(:,1)));
+Theta2_grad(:,1) -= ((lambda/m) * (Theta2(:,1)));
+
 %{
 % Regularization : calculate penalty
 % we need not penaliize the theta(1) as its just the base theta we have given.
