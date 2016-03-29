@@ -74,12 +74,22 @@ a2 = [ones(n,1) a2]; % 5000x26
 z3 = a2 * Theta2'; % 5000x10
 a3 = sigmoid(z3);  % 5000x10
 
-% Explode y into 10 values with Y[i] := i == y.
+
+
+%For example, if x(i) is an image of the digit 5, then the corresponding
+%y(i) (that you should use with the cost function) should be a 10-dimensional
+%vector with y5 = 1, and the other elements equal to 0.
+% So, Explode y into 10 values with Y[i] := i == y.
 Y = zeros(num_labels, m);
 Y(sub2ind(size(Y), y', 1:m)) = 1;
 
+%Y = 10x5000
+
 Y = Y';
 
+%size(y) 5000x1
+%size(Y) 5000x10
+%size(a3) 5000X10
 % Till now no regularization
 J = ((1/m) * sum(sum((-Y .* log(a3))-((1-Y) .* log(1-a3)))));
 
@@ -87,6 +97,7 @@ regularization_th1 = (lambda/(2*m)) * (sum(sum((Theta1(:,2:end)).^2)));
 regularization_th2 = (lambda/(2*m)) * (sum(sum((Theta2(:,2:end)).^2)));
 
 J = J + regularization_th1 + regularization_th2;
+
 
 
 delta_3 = a3 - y;
@@ -101,21 +112,6 @@ Theta2_grad = ((1/m) * delta_cap2) + ((lambda/m) * (Theta2));
 
 Theta1_grad(:,1) -= ((lambda/m) * (Theta1(:,1)));
 Theta2_grad(:,1) -= ((lambda/m) * (Theta2(:,1)));
-
-%{
-% Regularization : calculate penalty
-% we need not penaliize the theta(1) as its just the base theta we have given.
-% excluded the first theta value
-penalty = sum(theta2(2:end).^2);
-penalty = penalty*lambda/(2*m);
-J = cost * (-1) / m;
-% Regularization to avoid OVERFITTING/UNDERFITTING 
-%Add penalty to the cost!
-J = J + penalty;
-%}
-
-
-% -------------------------------------------------------------
 
 % =========================================================================
 
